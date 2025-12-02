@@ -1,0 +1,66 @@
+:root {
+	--bg: #0f1720;
+	--surface: #111418;
+	--muted: #9aa4ad;
+	--accent: #ff7a59;
+}
+
+.app-navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 56px;
+	padding: 0 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+	backdrop-filter: blur(6px);
+	border-bottom: 1px solid rgba(255,255,255,0.03);
+	color: #e6eef3;
+	z-index: 1000;
+}
+
+.app-navbar .nav-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.logo {
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: 0.6px;
+}
+.logo .dot {
+	color: var(--accent);
+	margin-left: 4px;
+}
+
+.title {
+	font-size: 14px;
+	color: var(--muted);
+}
+
+.app-navbar .nav-right {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.icon-btn {
+	background: transparent;
+	border: none;
+	color: #dfe9ee;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 8px;
+}
+.icon-btn:hover { background: rgba(255,255,255,0.02); }
+
+/* small screens padding for content below navbar */
+:global(body) { padding-top: 56px; }

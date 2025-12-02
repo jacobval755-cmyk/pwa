@@ -1,0 +1,31 @@
+<main class="login-page">
+	<section class="login-card">
+		<div class="brand">
+			<div class="logo">PWA<span class="dot">.</span></div>
+			<h1 class="headline">Bienvenido</h1>
+			<p class="sub">Accede a tu panel de sensores</p>
+		</div>
+
+		<form class="login-form" autocomplete="off" novalidate>
+			<label class="field">
+				<span class="label">Correo</span>
+				<input type="email" placeholder="tu@ejemplo.com" aria-label="email" />
+			</label>
+
+			<label class="field">
+				<span class="label">Contraseña</span>
+				<input type="password" placeholder="••••••••" aria-label="password" />
+			</label>
+
+			<!-- Botón principal -->
+			<button type="button" class="btn-primary" (click)="goDashboard()">Ingresar</button>
+
+			<!-- Nuevo botón independiente -->
+			<button type="button" class="btn-secondary" (click)="goDashboard()">
+				Ir al Dashboard
+			</button>
+		</form>
+
+		<div class="hint">Solo UI — sin lógica</div>
+	</section>
+</main>
