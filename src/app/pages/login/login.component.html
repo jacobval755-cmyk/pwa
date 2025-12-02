@@ -1,31 +1,66 @@
 <main class="login-page">
-	<section class="login-card">
-		<div class="brand">
-			<div class="logo">PWA<span class="dot">.</span></div>
-			<h1 class="headline">Bienvenido</h1>
-			<p class="sub">Accede a tu panel de sensores</p>
-		</div>
+  <p-card class="login-card">
+    <div class="brand">
+      <div class="logo">PWA<span class="dot">.</span></div>
+      <h1 class="headline">Bienvenido</h1>
+      <p class="sub">Accede a tu panel de sensores</p>
+    </div>
 
-		<form class="login-form" autocomplete="off" novalidate>
-			<label class="field">
-				<span class="label">Correo</span>
-				<input type="email" placeholder="tu@ejemplo.com" aria-label="email" />
-			</label>
+    <form class="login-form" autocomplete="off" novalidate>
 
-			<label class="field">
-				<span class="label">Contraseña</span>
-				<input type="password" placeholder="••••••••" aria-label="password" />
-			</label>
+      <!-- Campo correo -->
+      <div class="field">
+        <span class="label">Correo</span>
+        <span class="p-input-icon-left w-full">
+          <i class="pi pi-user"></i>
+          <input
+            pInputText
+            type="email"
+            placeholder="tu@ejemplo.com"
+            [(ngModel)]="email"
+            name="email"
+            class="w-full"
+          />
+        </span>
+      </div>
 
-			<!-- Botón principal -->
-			<button type="button" class="btn-primary" (click)="goDashboard()">Ingresar</button>
+      <!-- Campo contraseña -->
+      <div class="field">
+        <span class="label">Contraseña</span>
+        <span class="p-input-icon-left w-full">
+          <i class="pi pi-lock"></i>
+          <input
+            pInputText
+            type="password"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            name="password"
+            class="w-full"
+          />
+        </span>
+      </div>
 
-			<!-- Nuevo botón independiente -->
-			<button type="button" class="btn-secondary" (click)="goDashboard()">
-				Ir al Dashboard
-			</button>
-		</form>
+      <!-- Botón principal -->
+      <button
+        pButton
+        type="button"
+        label="Ingresar"
+        icon="pi pi-sign-in"
+        class="w-full mt-3"
+        (click)="goDashboard()"
+      ></button>
 
-		<div class="hint">Solo UI — sin lógica</div>
-	</section>
+      <!-- Botón secundario -->
+      <button
+        pButton
+        type="button"
+        label="Ir al Dashboard"
+        icon="pi pi-arrow-right"
+        class="p-button-secondary w-full mt-2"
+        (click)="goDashboard()"
+      ></button>
+    </form>
+
+    <div class="hint mt-3">Solo UI — sin lógica real</div>
+  </p-card>
 </main>

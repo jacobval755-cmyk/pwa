@@ -1,61 +1,71 @@
 <main class="dashboard-page">
-	<section class="dash-header">
-		<div class="greeting">
-			<h2>Panel</h2>
-			<p class="muted">Resumen de sensores — modo oscuro</p>
-		</div>
-		<div class="actions">
-			<button class="icon-btn">
-				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-			</button>
-		</div>
-	</section>
 
-	<section class="cards">
-		<article class="card">
-			<div class="card-title">Última temperatura</div>
-			<div class="card-value">23.7 °C</div>
-		</article>
+  <!-- Header -->
+  <section class="dash-header">
+    <div class="greeting">
+      <h2>Panel</h2>
+      <p class="muted">Resumen de sensores — modo oscuro</p>
+    </div>
 
-		<article class="card">
-			<div class="card-title">Estado del sensor</div>
-			<div class="card-value ok">Conectado</div>
-		</article>
+    <div class="actions">
+      <button pButton icon="pi pi-bars" class="p-button-rounded p-button-text"></button>
+    </div>
+  </section>
 
-		<article class="card">
-			<div class="card-title">Alertas</div>
-			<div class="card-value warn">2 nuevas</div>
-		</article>
-	</section>
+  <!-- Cards -->
+  <section class="cards">
 
-	<section class="chart-panel">
-		<div class="panel-head">
-			<h3>Temperatura del sensor</h3>
-			<div class="muted small">Valores ficticios</div>
-		</div>
+    <p-card class="card">
+      <div class="card-title">Última temperatura</div>
+      <div class="card-value">23.7 °C</div>
+    </p-card>
 
-		<!-- Static SVG chart (no logic) -->
-		<div class="temp-chart" role="img" aria-label="gráfica de temperatura">
-			<svg viewBox="0 0 300 140" preserveAspectRatio="none">
-				<defs>
-					<linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-						<stop offset="0" stop-color="#ff9a76" stop-opacity="0.9" />
-						<stop offset="1" stop-color="#ff7a59" stop-opacity="0.1" />
-					</linearGradient>
-				</defs>
-				<rect x="0" y="0" width="300" height="140" fill="transparent" />
-				<polyline fill="url(#g)" stroke="#ff9a76" stroke-width="2" points="0,100 30,90 60,70 90,80 120,60 150,65 180,55 210,70 240,50 270,60 300,45" />
-			</svg>
-		</div>
-	</section>
+    <p-card class="card">
+      <div class="card-title">Estado del sensor</div>
+      <div class="card-value ok">Conectado</div>
+    </p-card>
 
-	<section class="notifications">
-		<h4>Notificaciones</h4>
-		<ul>
-			<li>Sensor A: temperatura estable</li>
-			<li class="alert">Sensor B: temperatura alta (28°C)</li>
-		</ul>
-	</section>
+    <p-card class="card">
+      <div class="card-title">Alertas</div>
+      <div class="card-value warn">2 nuevas</div>
+    </p-card>
+
+  </section>
+
+  <!-- Chart Panel -->
+  <section class="chart-panel">
+    <div class="panel-head">
+      <h3>Temperatura del sensor</h3>
+      <div class="muted small">Valores ficticios</div>
+    </div>
+
+    <div class="temp-chart" role="img" aria-label="gráfica de temperatura">
+      <svg viewBox="0 0 300 140" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#ff9a76" stop-opacity="0.9" />
+            <stop offset="1" stop-color="#ff7a59" stop-opacity="0.1" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="300" height="140" fill="transparent" />
+        <polyline
+          fill="url(#g)"
+          stroke="#ff9a76"
+          stroke-width="2"
+          points="0,100 30,90 60,70 90,80 120,60 150,65 180,55
+                  210,70 240,50 270,60 300,45"
+        />
+      </svg>
+    </div>
+  </section>
+
+  <!-- Notifications -->
+  <section class="notifications">
+    <h4>Notificaciones</h4>
+    <ul>
+      <li>Sensor A: temperatura estable</li>
+      <li class="alert">Sensor B: temperatura alta (28°C)</li>
+    </ul>
+  </section>
+
 </main>

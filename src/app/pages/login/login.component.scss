@@ -1,65 +1,131 @@
-:root{
-	--bg: #0b0f12;
-	--panel: #0f1417;
-	--muted: #9aa4ad;
-	--accent: #ff7a59;
-	--glass: rgba(255,255,255,0.03);
+/* === Layout general === */
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  padding: 20px;
 }
 
-.login-page{
-	min-height: calc(100vh - 56px);
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	padding: 18px;
-	background: linear-gradient(180deg,#081018 0%, #071018 60%);
-	background-color: var(--bg);
+/* === Tarjeta de login === */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem 2.2rem;
+  border-radius: 18px !important;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+  .p-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
 }
 
-.login-card{
-	width:100%;
-	max-width:420px;
-	background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.2));
-	border: 1px solid rgba(255,255,255,0.03);
-	padding:20px;
-	border-radius:12px;
-	box-shadow: 0 8px 24px rgba(2,6,23,0.6);
-	color:#e6eef3;
+/* === Branding === */
+.brand {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  .logo {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #fff;
+
+    .dot {
+      color: #00d2ff;
+    }
+  }
+
+  .headline {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .sub {
+    margin-top: 2px;
+    color: #e4e4e4;
+  }
 }
 
-.brand{ text-align:center; margin-bottom:12px }
-.logo{ font-weight:700; font-size:20px }
-.logo .dot{ color: var(--accent); margin-left:4px }
-.headline{ margin:6px 0; font-size:20px }
-.sub{ color:var(--muted); font-size:13px }
+/* === Campos === */
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 
-.login-form{ display:flex; flex-direction:column; gap:12px; margin-top:8px }
-.field{ display:flex; flex-direction:column; gap:6px }
-.label{ font-size:12px; color:var(--muted) }
-input{
-	background: rgba(255,255,255,0.02);
-	border: 1px solid rgba(255,255,255,0.03);
-	color: #eaf2f6;
-	padding:12px 14px;
-	border-radius:8px;
-	outline:none;
+  .label {
+    font-size: 0.9rem;
+    color: #e8e8e8;
+    margin-bottom: 6px;
+  }
+
+  /* Input PrimeNG */
+  input[pInputText] {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    &:focus {
+      border-color: #00d2ff !important;
+      box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+    }
+  }
+
+  /* Iconos PrimeNG dentro del input */
+  .p-input-icon-left > i {
+    color: #e8e8e8 !important;
+  }
 }
-input::placeholder{ color: rgba(230,238,243,0.35) }
 
-.btn-primary{
-	margin-top:6px;
-	width:100%;
-	padding:12px 14px;
-	background: linear-gradient(90deg,var(--accent), #ff967a);
-	color:#071018;
-	border:none;
-	border-radius:10px;
-	font-weight:600;
+/* === Botones === */
+button {
+  border-radius: 12px !important;
+  font-size: 1rem !important;
+  padding: 0.9rem !important;
+  font-weight: 600 !important;
 }
-.btn-primary:active{ transform: translateY(1px) }
 
-.hint{ margin-top:12px; color:var(--muted); font-size:12px; text-align:center }
+/* Botón principal */
+.p-button {
+  background: #00d2ff !important;
+  border-color: #00d2ff !important;
+  color: #000 !important;
 
-@media(min-width:700px){
-	.login-card{ padding:28px }
+  &:hover {
+    background: #19e1ff !important;
+  }
+}
+
+/* Botón secundario */
+.p-button-secondary {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
+}
+
+/* === Hint inferior === */
+.hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #ddd;
+  margin-top: 1rem;
 }

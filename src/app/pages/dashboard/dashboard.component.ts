@@ -1,11 +1,23 @@
 import { Component } from '@angular/core';
 
+// PrimeNG
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
+
+// Angular
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  standalone: true,
+  imports: [
+    CommonModule,
+    CardModule,
+    ButtonModule,
+    DividerModule
+  ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
-
-}
+export class DashboardComponent {}
