@@ -1,107 +1,159 @@
-.dashboard-page {
-  padding: 20px;
-  background: #0f172a;
-  min-height: 100vh;
-  color: #e2e8f0;
-}
-
-/* Header */
-.dash-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .greeting h2 {
-    margin: 0;
-    font-size: 1.8rem;
-    color: #fff;
-  }
-
-  .muted {
-    color: #94a3b8;
-    margin-top: 3px;
-  }
-}
-
-/* Cards */
-.cards {
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-
-  .card {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-radius: 16px !important;
-    padding: 1.2rem;
-
-    .card-title {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-      margin-bottom: 6px;
-    }
-
-    .card-value {
-      font-size: 1.6rem;
-      font-weight: 600;
-
-      &.ok {
-        color: #4ade80;
-      }
-
-      &.warn {
-        color: #fb923c;
-      }
-    }
-  }
-}
-
-/* Chart Panel */
-.chart-panel {
-  margin-top: 30px;
-  background: rgba(255, 255, 255, 0.05);
+.dashboard {
   padding: 1.5rem;
-  border-radius: 16px;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1e293b 0, #020617 55%);
+  color: #e5e7eb;
 
-  .panel-head h3 {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 600;
     margin: 0;
-    color: #fff;
   }
 
-  .small {
+  &__subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #9ca3af;
+  }
+
+  &__refresh {
+    align-self: flex-start;
+  }
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3rem;
+
+    p {
+      margin: 0;
+      color: #cbd5f5;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  &__card {
+    .p-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 1rem;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .p-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .p-card-content {
+      color: #e5e7eb;
+      font-size: 0.9rem;
+    }
+  }
+
+  &__summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  &__summary-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+  }
+
+  &__summary-value {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-top: 0.25rem;
+    color: #fbbf24;
+  }
+
+  &__summary-secondary {
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
+    color: #cbd5f5;
+  }
+
+  &__chart-container {
+    position: relative;
+    width: 100%;
+    height: 280px;
+
+    @media (min-width: 768px) {
+      height: 320px;
+    }
+  }
+
+  &__empty {
+    margin-top: 0.5rem;
     font-size: 0.85rem;
-    margin-top: 2px;
+    color: #9ca3af;
   }
 
-  .temp-chart {
-    margin-top: 15px;
+  // Tabla
+  ::ng-deep .p-table {
+    font-size: 0.85rem;
 
-    svg {
-      width: 100%;
-      height: 160px;
-    }
-  }
-}
-
-/* Notifications */
-.notifications {
-  margin-top: 30px;
-
-  h4 {
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  ul {
-    padding-left: 20px;
-
-    li {
-      margin-bottom: 6px;
-      color: #cbd5e1;
+    .p-datatable-thead > tr > th {
+      background: #020617;
+      color: #9ca3af;
+      border: 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      font-weight: 500;
     }
 
-    .alert {
-      color: #f87171;
+    .p-datatable-tbody > tr > td {
+      border: 0;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+    }
+
+    .p-paginator {
+      background: transparent;
+      border: 0;
+      color: #9ca3af;
+    }
+  }
+
+  @media (min-width: 768px) {
+    &__grid {
+      grid-template-columns: 2fr 3fr;
+      grid-template-areas:
+        "summary chart"
+        "table   table";
+    }
+
+    &__card--summary {
+      grid-area: summary;
+    }
+
+    &__card--chart {
+      grid-area: chart;
+    }
+
+    &__card--table {
+      grid-area: table;
     }
   }
 }

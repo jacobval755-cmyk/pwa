@@ -1,71 +1,110 @@
-<main class="dashboard-page">
+<div class="dashboard">
 
-  <!-- Header -->
-  <section class="dash-header">
-    <div class="greeting">
-      <h2>Panel</h2>
-      <p class="muted">Resumen de sensores — modo oscuro</p>
+  <div class="dashboard__header">
+    <div>
+      <h2 class="dashboard__title">Dashboard IoT – ESP32</h2>
+      <p class="dashboard__subtitle">
+        Telemetría desde MongoDB (temperatura y humedad).
+      </p>
     </div>
 
-    <div class="actions">
-      <button pButton icon="pi pi-bars" class="p-button-rounded p-button-text"></button>
-    </div>
-  </section>
+    <button
+      pButton
+      type="button"
+      label="Actualizar"
+      icon="pi pi-refresh"
+      class="p-button-rounded p-button-text dashboard__refresh"
+      (click)="loadData()"
+      [disabled]="loading">
+    </button>
+  </div>
 
-  <!-- Cards -->
-  <section class="cards">
+  <div *ngIf="loading" class="dashboard__loading">
+    <p-progressSpinner></p-progressSpinner>
+    <p>Cargando datos...</p>
+  </div>
 
-    <p-card class="card">
-      <div class="card-title">Última temperatura</div>
-      <div class="card-value">23.7 °C</div>
+  <div *ngIf="!loading" class="dashboard__grid">
+
+    <!-- Resumen -->
+    <p-card class="dashboard__card dashboard__card--summary">
+      <ng-template pTemplate="title">
+        Resumen
+      </ng-template>
+
+      <ng-template pTemplate="content">
+        <div class="dashboard__summary">
+          <div>
+            <span class="dashboard__summary-label">Registros totales</span>
+            <div class="dashboard__summary-value">
+              {{ count ?? 0 }}
+            </div>
+          </div>
+
+          <div *ngIf="lastUpdated">
+            <span class="dashboard__summary-label">Última lectura</span>
+            <div class="dashboard__summary-secondary">
+              {{ lastUpdated | date:'short' }}
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </p-card>
 
-    <p-card class="card">
-      <div class="card-title">Estado del sensor</div>
-      <div class="card-value ok">Conectado</div>
+    <!-- Gráfica -->
+    <p-card class="dashboard__card dashboard__card--chart">
+      <ng-template pTemplate="title">
+        Temperatura y humedad (últimas lecturas)
+      </ng-template>
+
+      <ng-template pTemplate="content">
+        <div class="dashboard__chart-container" *ngIf="chartData">
+          <p-chart
+            type="line"
+            [data]="chartData"
+            [options]="chartOptions">
+          </p-chart>
+        </div>
+        <p *ngIf="!telemetry.length" class="dashboard__empty">
+          No hay datos suficientes para mostrar la gráfica.
+        </p>
+      </ng-template>
     </p-card>
 
-    <p-card class="card">
-      <div class="card-title">Alertas</div>
-      <div class="card-value warn">2 nuevas</div>
+    <!-- Tabla -->
+    <p-card class="dashboard__card dashboard__card--table">
+      <ng-template pTemplate="title">
+        Lecturas recientes
+      </ng-template>
+
+      <ng-template pTemplate="content">
+        <p-table
+          [value]="telemetry"
+          responsiveLayout="scroll"
+          [paginator]="true"
+          [rows]="10">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Fecha (ESP)</th>
+              <th>Temp (°C)</th>
+              <th>Humedad (%)</th>
+              <th>Device</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-row>
+            <tr>
+              <td>{{ row.ts_esp | date:'short' }}</td>
+              <td>{{ row.temperature }}</td>
+              <td>{{ row.humidity }}</td>
+              <td>{{ row.device_id }}</td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </ng-template>
     </p-card>
 
-  </section>
-
-  <!-- Chart Panel -->
-  <section class="chart-panel">
-    <div class="panel-head">
-      <h3>Temperatura del sensor</h3>
-      <div class="muted small">Valores ficticios</div>
-    </div>
-
-    <div class="temp-chart" role="img" aria-label="gráfica de temperatura">
-      <svg viewBox="0 0 300 140" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stop-color="#ff9a76" stop-opacity="0.9" />
-            <stop offset="1" stop-color="#ff7a59" stop-opacity="0.1" />
-          </linearGradient>
-        </defs>
-        <rect x="0" y="0" width="300" height="140" fill="transparent" />
-        <polyline
-          fill="url(#g)"
-          stroke="#ff9a76"
-          stroke-width="2"
-          points="0,100 30,90 60,70 90,80 120,60 150,65 180,55
-                  210,70 240,50 270,60 300,45"
-        />
-      </svg>
-    </div>
-  </section>
-
-  <!-- Notifications -->
-  <section class="notifications">
-    <h4>Notificaciones</h4>
-    <ul>
-      <li>Sensor A: temperatura estable</li>
-      <li class="alert">Sensor B: temperatura alta (28°C)</li>
-    </ul>
-  </section>
-
-</main>
+  </div>
+</div>
