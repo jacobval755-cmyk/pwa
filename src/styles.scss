@@ -1,15 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-/* Reset global para eliminar bordes y márgenes */
+/* Tus estilos globales solamente */
+@import "primeicons/primeicons.css";
+
 html, body {
   margin: 0 !important;
   padding: 0 !important;
   width: 100%;
   height: 100%;
-  background: #0f172a; /* tu color global */
+  background: #000000;
   overflow-x: hidden;
 }
 
-/* Opcional: quitar padding/outline de todos los elementos */
 * {
   box-sizing: border-box;
 }

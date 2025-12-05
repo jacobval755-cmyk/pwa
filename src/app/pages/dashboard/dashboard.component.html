@@ -11,9 +11,9 @@
     <button
       pButton
       type="button"
-      label="Actualizar"
-      icon="pi pi-refresh"
-      class="p-button-rounded p-button-text dashboard__refresh"
+      [label]="loading ? 'Actualizando...' : 'Actualizar'"
+      [icon]="loading ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"
+      class="dashboard__refresh p-button-rounded p-button-text"
       (click)="loadData()"
       [disabled]="loading">
     </button>
@@ -26,7 +26,7 @@
 
   <div *ngIf="!loading" class="dashboard__grid">
 
-    <!-- Resumen -->
+    <!-- Resumen general -->
     <p-card class="dashboard__card dashboard__card--summary">
       <ng-template pTemplate="title">
         Resumen
@@ -41,13 +41,74 @@
             </div>
           </div>
 
-          <div *ngIf="lastUpdated">
+          <!-- Usamos alias 'lt' para la última lectura -->
+          <div *ngIf="lastTelemetry as lt">
             <span class="dashboard__summary-label">Última lectura</span>
             <div class="dashboard__summary-secondary">
-              {{ lastUpdated | date:'short' }}
+              {{ (lt.ts_esp || lt.ts_server) | date:'short' }}
             </div>
           </div>
         </div>
+
+        <!-- Métricas de la última lectura -->
+        <div class="dashboard__metrics" *ngIf="lastTelemetry as lt">
+          <div class="dashboard__metric">
+            <span class="dashboard__metric-label">Temp actual</span>
+            <div class="dashboard__metric-value dashboard__metric-value--temp">
+              {{ lt.temperature }}°C
+            </div>
+          </div>
+
+          <div class="dashboard__metric">
+            <span class="dashboard__metric-label">Humedad actual</span>
+            <div class="dashboard__metric-value dashboard__metric-value--hum">
+              {{ lt.humidity }}%
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <!-- Métricas de intervalo -->
+    <p-card class="dashboard__card dashboard__card--intervals">
+      <ng-template pTemplate="title">
+        Intervalos de envío (segundos)
+      </ng-template>
+
+      <ng-template pTemplate="content">
+        <div *ngIf="avgIntervalSec !== null; else noIntervalData" class="dashboard__intervals">
+          <div class="dashboard__interval-item">
+            <span class="dashboard__summary-label">Intervalo actual</span>
+            <div class="dashboard__interval-value">
+              {{ currentIntervalSec }} s
+            </div>
+          </div>
+
+          <div class="dashboard__interval-item">
+            <span class="dashboard__summary-label">Promedio</span>
+            <div class="dashboard__interval-value">
+              {{ avgIntervalSec }} s
+            </div>
+          </div>
+
+          <div class="dashboard__interval-item">
+            <span class="dashboard__summary-label">Mínimo</span>
+            <div class="dashboard__interval-value">
+              {{ minIntervalSec }} s
+            </div>
+          </div>
+
+          <div class="dashboard__interval-item">
+            <span class="dashboard__summary-label">Máximo</span>
+            <div class="dashboard__interval-value">
+              {{ maxIntervalSec }} s
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noIntervalData>
+          <p class="dashboard__empty">Aún no hay suficientes lecturas para calcular intervalos.</p>
+        </ng-template>
       </ng-template>
     </p-card>
 
@@ -82,23 +143,49 @@
           [value]="telemetry"
           responsiveLayout="scroll"
           [paginator]="true"
-          [rows]="10">
+          [rows]="10"
+          [rowHover]="true">
 
           <ng-template pTemplate="header">
             <tr>
               <th>Fecha (ESP)</th>
               <th>Temp (°C)</th>
               <th>Humedad (%)</th>
+              <th>Δt (s)</th>
               <th>Device</th>
+              <th></th>
             </tr>
           </ng-template>
 
-          <ng-template pTemplate="body" let-row>
+          <ng-template pTemplate="body" let-row let-i="rowIndex">
             <tr>
-              <td>{{ row.ts_esp | date:'short' }}</td>
+              <td>{{ row.ts_esp || row.ts_server | date:'short' }}</td>
               <td>{{ row.temperature }}</td>
               <td>{{ row.humidity }}</td>
+
+              <!-- Δt con respecto a la lectura anterior -->
+              <td
+                pTooltip="Segundos transcurridos desde la lectura anterior"
+                tooltipPosition="top">
+                <ng-container *ngIf="getDeltaSeconds(i) !== null; else firstRowDelta">
+                  {{ getDeltaSeconds(i) }} s
+                </ng-container>
+                <ng-template #firstRowDelta>
+                  –
+                </ng-template>
+              </td>
+
               <td>{{ row.device_id }}</td>
+
+              <td class="dashboard__pill-cell">
+                <p-tag
+                  *ngIf="i === telemetry.length - 1"
+                  value="Última"
+                  severity="success"
+                  rounded
+                  class="dashboard__tag-live">
+                </p-tag>
+              </td>
             </tr>
           </ng-template>
 

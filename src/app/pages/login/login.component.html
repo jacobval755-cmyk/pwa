@@ -6,12 +6,19 @@
       <p class="sub">Accede a tu panel de sensores</p>
     </div>
 
-    <form class="login-form" autocomplete="off" novalidate>
+    <!-- Mensaje de error -->
+    <p-message
+      *ngIf="errorMessage"
+      severity="error"
+      [text]="errorMessage"
+      class="login-error-message"
+    ></p-message>
 
+    <form class="login-form" autocomplete="off" novalidate>
       <!-- Campo correo -->
       <div class="field">
         <span class="label">Correo</span>
-        <span class="p-input-icon-left w-full">
+        <span class="p-input-icon-left">
           <i class="pi pi-user"></i>
           <input
             pInputText
@@ -19,7 +26,6 @@
             placeholder="tu@ejemplo.com"
             [(ngModel)]="email"
             name="email"
-            class="w-full"
           />
         </span>
       </div>
@@ -27,7 +33,7 @@
       <!-- Campo contraseña -->
       <div class="field">
         <span class="label">Contraseña</span>
-        <span class="p-input-icon-left w-full">
+        <span class="p-input-icon-left">
           <i class="pi pi-lock"></i>
           <input
             pInputText
@@ -35,7 +41,6 @@
             placeholder="••••••••"
             [(ngModel)]="password"
             name="password"
-            class="w-full"
           />
         </span>
       </div>
@@ -46,21 +51,15 @@
         type="button"
         label="Ingresar"
         icon="pi pi-sign-in"
-        class="w-full mt-3"
         (click)="goDashboard()"
-      ></button>
-
-      <!-- Botón secundario -->
-      <button
-        pButton
-        type="button"
-        label="Ir al Dashboard"
-        icon="pi pi-arrow-right"
-        class="p-button-secondary w-full mt-2"
-        (click)="goDashboard()"
+        [disabled]="loading"
       ></button>
     </form>
 
-    <div class="hint mt-3">Solo UI — sin lógica real</div>
+    <div class="hint">
+      Usuarios de prueba:<br />
+      <strong>jacob&#64;gmail.com / 123456</strong><br />
+      <strong>emma&#64;gmail.com / 123456</strong>
+    </div>
   </p-card>
 </main>

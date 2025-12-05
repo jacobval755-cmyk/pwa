@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #4b6cb7, #182848);
+  background: linear-gradient(135deg, #4b6cb7, #000000);
   padding: 20px;
 }
 
@@ -12,46 +12,56 @@
 .login-card {
   width: 100%;
   max-width: 420px;
-  padding: 2rem 2.2rem;
-  border-radius: 18px !important;
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 
   .p-card {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    padding: 2rem 2.2rem;
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    background: rgba(15, 23, 42, 0.9); /* un poco más oscuro para Aura */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(148, 163, 184, 0.35);
   }
 }
 
 /* === Branding === */
 .brand {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 
   .logo {
     font-size: 2.4rem;
     font-weight: 700;
-    color: #fff;
+    color: #f9fafb;
 
     .dot {
-      color: #00d2ff;
+      color: #22d3ee;
     }
   }
 
   .headline {
-    margin: 0;
-    margin-top: 5px;
+    margin: 5px 0 0;
     font-size: 1.6rem;
     font-weight: 600;
-    color: #fff;
+    color: #e5e7eb;
   }
 
   .sub {
     margin-top: 2px;
-    color: #e4e4e4;
+    color: #9ca3af;
+    font-size: 0.9rem;
   }
+}
+
+/* === Mensaje de error === */
+.login-error-message {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* === Formulario === */
+.login-form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* === Campos === */
@@ -62,70 +72,43 @@
 
   .label {
     font-size: 0.9rem;
-    color: #e8e8e8;
+    color: #e5e7eb;
     margin-bottom: 6px;
+  }
+
+  .p-input-icon-left {
+    width: 100%;
   }
 
   /* Input PrimeNG */
   input[pInputText] {
     width: 100%;
-    padding: 12px;
+    padding: 0.75rem 0.75rem 0.75rem 2.25rem;
     font-size: 0.95rem;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.2) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    &:focus {
-      border-color: #00d2ff !important;
-      box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
-    }
-  }
-
-  /* Iconos PrimeNG dentro del input */
-  .p-input-icon-left > i {
-    color: #e8e8e8 !important;
   }
 }
 
-/* === Botones === */
-button {
-  border-radius: 12px !important;
-  font-size: 1rem !important;
-  padding: 0.9rem !important;
-  font-weight: 600 !important;
+/* Color de iconos dentro del input */
+.p-input-icon-left > i {
+  color: #9ca3af;
 }
 
-/* Botón principal */
-.p-button {
-  background: #00d2ff !important;
-  border-color: #00d2ff !important;
-  color: #000 !important;
-
-  &:hover {
-    background: #19e1ff !important;
-  }
-}
-
-/* Botón secundario */
-.p-button-secondary {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  color: #fff !important;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.3) !important;
-  }
+/* === Botón === */
+.login-form button.p-button {
+  width: 100%;
+  margin-top: 0.25rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  padding: 0.9rem;
+  font-weight: 600;
 }
 
 /* === Hint inferior === */
 .hint {
   text-align: center;
   font-size: 0.85rem;
-  color: #ddd;
-  margin-top: 1rem;
+  color: #cbd5f5;
+  margin-top: 1.3rem;
+  line-height: 1.4;
 }
